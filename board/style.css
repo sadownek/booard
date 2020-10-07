@@ -1,13 +1,11 @@
 .board-wrapper{
-    width: 80%;
-    border: 3px solid rgb(18, 94, 58);
+    width: fit-content;
+    border: 3px solid black;
     border-radius: 10px;
     height: 500px;
     margin: auto;
 }
 
 #board {
-    width: -webkit-fill-available;
-    height: -webkit-fill-available;
+    cursor: crosshair;
 }
-

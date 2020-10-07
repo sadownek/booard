@@ -6,8 +6,46 @@
 
 <body>
     <div class="board-wrapper">
-        <canvas id='board'>
+        <canvas id='board' width="1000" height="500">
     </div>
+    <input type="color" id="colorPicker" value="#000000">
+    <input type="button" id="clearBoard" value="Очистить">
+    <div id="offsetData"></div>
 </body>
+
+<script>
+    const board = document.getElementById('board')
+    const ctx = board.getContext('2d')
+    const offsetDiv = document.getElementById('offsetData');
+    const colorPicker = document.getElementById('colorPicker');
+    const clearBoard = document.getElementById('clearBoard');
+
+    let mousedown = false
+
+    clearBoard.onclick = function() {
+        mousedown = false
+        ctx.clearRect(0, 0, board.width, board.height)
+    }
+
+    board.onmousedown = function (e) { 
+        mousedown = true
+        ctx.moveTo(e.offsetX, e.offsetY)
+        ctx.beginPath()
+        ctx.lineWidth = 3
+        ctx.lineCap = "round"
+        ctx.strokeStyle = colorPicker.value
+    }
+
+    board.onmouseup = function () { mousedown = false }
+
+    board.onmousemove = function (e) {
+        if (mousedown === true) {
+            ctx.lineTo(e.offsetX, e.offsetY)
+            ctx.stroke()
+            offsetDiv.innerText = `X: ${e.offsetX}, Y: ${e.offsetY}`
+        }
+    }
+
+</script>
 
 </html>
